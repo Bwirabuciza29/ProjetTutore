@@ -25,7 +25,7 @@ function Modifier_Stock()
     $quantite = isset($_POST["quantite"]) ? htmlspecialchars(trim($_POST["quantite"])) : null;
     $type = isset($_POST["type"]) ? htmlspecialchars(trim($_POST["type"])) : null;
 
-    return Stock::Modifier_Mouvement($idMouv, $quantite, $type);
+    return Stock::Modifier_Stock($idMouv, $quantite, $type);
 }
 
 function get_all_stock()

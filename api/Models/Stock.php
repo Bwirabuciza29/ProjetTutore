@@ -70,7 +70,7 @@ class Stock
         }
     }
 
-    public static function Modifier_Mouvement($idMouv, $quantite, $type)
+    public static function Modifier_Stock($idMouv, $quantite, $type)
     {
         $data = get_connection();
         $response = array();
