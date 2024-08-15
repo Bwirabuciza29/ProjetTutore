@@ -17,6 +17,7 @@ if ((isset($_GET['user']) && $_GET['user'] == 'emmanuel' || isset($_GET['user'])
     require "./Routes/agent.php";
     require "./Routes/vehicule.php";
     require "./Routes/reparation.php";
+    require "./Routes/mouvement_vh.php";
     // GESTION STOCK
     require "./Routes/category.php";
     require "./Routes/stock.php";

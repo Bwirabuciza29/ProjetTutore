@@ -20,7 +20,7 @@ if ($url_path1 == "stock") {
             $data["response"] = Enregistrer_Stock();
             echo json_encode($data);
         } elseif ($url_path2 == "modifier") {
-            $data["response"] = Modifier_Mouvement();
+            $data["response"] = Modifier_Stock();
             echo json_encode($data);
         } elseif ($url_path2 == "supprimer") {
             $data["response"] = Supprimer_Stock();

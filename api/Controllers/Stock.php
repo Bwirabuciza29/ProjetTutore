@@ -19,7 +19,7 @@ function Supprimer_Stock()
     return Stock::Supprimer_Stock($idStock);
 }
 
-function Modifier_Mouvement()
+function Modifier_Stock()
 {
     $idMouv = $_POST["idMouv"];
     $quantite = isset($_POST["quantite"]) ? htmlspecialchars(trim($_POST["quantite"])) : null;
