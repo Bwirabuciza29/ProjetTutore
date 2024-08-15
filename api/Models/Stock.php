@@ -75,7 +75,7 @@ class Stock
         $data = get_connection();
         $response = array();
 
-        // Récupérer les informations actuelles
+        // Récupérer les informations actuelles du mouvement et du stock
         $mouvement = $data->query("SELECT * FROM mouvement WHERE id = '$idMouv'")->fetch();
         $stock = $data->query("SELECT * FROM stock WHERE idMouv = '$idMouv'")->fetch();
 
@@ -85,38 +85,49 @@ class Stock
             $currentQteSortie = $stock['QteSortie'];
             $total = $stock['total'];
 
-            // Calcul des nouvelles quantités pour le stock
-            if ($mouvement['type'] == 'Entree') {
-                $newQteEntree = $currentQteEntree - $mouvement['quantite'] + $quantite;
-                $qteEntree = $newQteEntree;
-                $qteSortie = $currentQteSortie;
-            } elseif ($mouvement['type'] == 'Sortie') {
-                $newQteSortie = $currentQteSortie - $mouvement['quantite'] + $quantite;
-                $qteEntree = $currentQteEntree;
-                $qteSortie = $newQteSortie;
-            }
+            if ($type == 'Sortie') {
+                // Si type est "Sortie", mettre à jour uniquement QteSortie
+                $newQteSortie = $currentQteSortie + $quantite;
+                $total = $currentQteEntree - $newQteSortie;
 
-            $total = $qteEntree - $qteSortie;
+                $updateQuery = "UPDATE stock SET QteSortie='$newQteSortie', total='$total' WHERE idMouv = '$idMouv' AND idPiece = '$pieceId'";
+
+                if ($data->query($updateQuery)) {
+                    $response["message"] = "Stock mis à jour avec succès";
+                } else {
+                    $response["message"] = "Échec de la mise à jour du stock";
+                }
+            } elseif ($type == 'Entree') {
+                // Si type est "Entree", mettre à jour uniquement QteEntree
+                $newQteEntree = $currentQteEntree + $quantite;
+                $total = $newQteEntree - $currentQteSortie;
+
+                $updateQuery = "UPDATE stock SET QteEntree='$newQteEntree', total='$total' WHERE idMouv = '$idMouv' AND idPiece = '$pieceId'";
+
+                if ($data->query($updateQuery)) {
+                    $response["message"] = "Stock mis à jour avec succès";
+                } else {
+                    $response["message"] = "Échec de la mise à jour du stock";
+                }
+            } else {
+                // Si type est autre que "Sortie" ou "Entree", vous pouvez gérer cela comme une erreur ou ne rien faire.
+                $response["message"] = "Type de mouvement inconnu. Aucune mise à jour effectuée.";
+            }
 
             // Mise à jour du mouvement
             if ($data->query("UPDATE mouvement SET quantite='$quantite', type='$type' WHERE id = '$idMouv'")) {
-                // Mise à jour du stock
-                if ($data->query("UPDATE stock SET QteEntree='$qteEntree', QteSortie='$qteSortie', total='$total' WHERE idMouv = '$idMouv' AND idPiece = '$pieceId'")) {
-                    $response["message"] = "Modification réussie";
-                    return $response;
-                } else {
-                    $response["message"] = "Échec de modification du stock";
-                    return $response;
-                }
+                $response["message"] = "Mouvement mis à jour avec succès";
             } else {
-                $response["message"] = "Échec de modification du mouvement";
-                return $response;
+                $response["message"] = "Échec de la mise à jour du mouvement";
             }
         } else {
             $response["message"] = "Mouvement ou stock non trouvé";
-            return $response;
         }
+
+        return $response;
     }
+
+
 
     public static function get_all_Stock()
     {
