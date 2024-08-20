@@ -52,7 +52,7 @@ class Log
     public static function get_all_Log()
     {
         $data = get_connection();
-        $donnees = $data->query("SELECT * FROM all_log ORDER BY id_psw DESC")->fetchAll();
+        $donnees = $data->query("SELECT * FROM users")->fetchAll();
         if (count($donnees) > 0) {
             return $donnees;
         } else {
