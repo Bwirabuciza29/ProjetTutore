@@ -15,13 +15,13 @@ function Enregistrer_Admin()
 
 function Supprimer_Admin()
 {
-    $Id_adm = $_POST["Id_adm"];
-    return Admin::Supprimer_Admin($Id_adm);
+    $id_adm = $_POST["id_adm"];
+    return Admin::Supprimer_Admin($id_adm);
 }
 
 function Modifier_Admin()
 {
-    $Id_adm = $_POST["Id_adm"];
+    $id_adm = $_POST["id_adm"];
     $Id_cat = isset($_POST["Id_cat"]) ? htmlspecialchars(trim($_POST["Id_cat"])) : null;
     $nom_a = isset($_POST["nom_a"]) ? htmlspecialchars(trim($_POST["nom_a"])) : null;
     $prenom_a = isset($_POST["prenom_a"]) ? htmlspecialchars(trim($_POST["prenom_a"])) : null;
@@ -29,7 +29,7 @@ function Modifier_Admin()
     $phone_a = isset($_POST["phone_a"]) ? htmlspecialchars(trim($_POST["phone_a"])) : null;
     $adresse = isset($_POST["adresse"]) ? htmlspecialchars(trim($_POST["adresse"])) : null;
 
-    return Admin::Modifier_Admin($Id_adm, $Id_cat, $nom_a, $prenom_a, $email_a, $phone_a, $adresse);
+    return Admin::Modifier_Admin($id_adm, $Id_cat, $nom_a, $prenom_a, $email_a, $phone_a, $adresse);
 }
 
 function get_all_admin()

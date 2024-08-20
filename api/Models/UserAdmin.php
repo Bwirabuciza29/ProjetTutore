@@ -24,11 +24,11 @@ class Admin
         }
     }
 
-    public static function Supprimer_Admin($Id_adm)
+    public static function Supprimer_Admin($id_adm)
     {
         $data = get_connection();
         $response = array();
-        if ($data->query("DELETE FROM user_admin WHERE Id_adm = '$Id_adm'")) {
+        if ($data->query("DELETE FROM user_admin WHERE id_adm = '$id_adm'")) {
             $response["message"] = "Suppression réussie";
             return $response;
         } else {
@@ -37,13 +37,13 @@ class Admin
         }
     }
 
-    public static function Modifier_Admin($Id_adm, $Id_cat, $nom_a, $prenom_a, $email_a, $phone_a, $adresse)
+    public static function Modifier_Admin($id_adm, $Id_cat, $nom_a, $prenom_a, $email_a, $phone_a, $adresse)
     {
         $data = get_connection();
         $response = array();
         $matricule = self::generate_matricule($Id_cat);
 
-        if ($data->query("UPDATE user_admin SET Id_cat='$Id_cat', nom_a='$nom_a', prenom_a='$prenom_a', email_a='$email_a', phone_a='$phone_a', adresse='$adresse', matricule='$matricule' WHERE Id_adm = '$Id_adm'")) {
+        if ($data->query("UPDATE user_admin SET Id_cat='$Id_cat', nom_a='$nom_a', prenom_a='$prenom_a', email_a='$email_a', phone_a='$phone_a', adresse='$adresse', matricule='$matricule' WHERE id_adm = '$id_adm'")) {
             $response["message"] = "Modification réussie";
             return $response;
         } else {
