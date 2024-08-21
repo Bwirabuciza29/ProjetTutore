@@ -67,7 +67,7 @@ class Vehicule
     public static function get_all_Vehicules()
     {
         $data = get_connection();
-        $donnees = $data->query("SELECT * FROM vehicule ORDER BY id DESC")->fetchAll();
+        $donnees = $data->query("SELECT * FROM affectation")->fetchAll();
         if (count($donnees) > 0) {
             return $donnees;
         } else {
