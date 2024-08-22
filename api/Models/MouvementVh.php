@@ -58,12 +58,7 @@ class MouvementVh
     public static function get_all_Mouvements()
     {
         $data = get_connection();
-        $query = "SELECT mv.id, v.designation AS vehicule, mv.destination, mv.trajet, mv.consommation, mv.type_carburant, mv.dateSortie, mv.dateRetour, a.noms AS chauffeur
-                  FROM mouvement_vh mv
-                  JOIN vehicule v ON mv.idVeh = v.id
-                  JOIN agent a ON v.idAgent = a.id
-                  WHERE a.category = 'Chauffeur'
-                  ORDER BY mv.id DESC";
+        $query = "SELECT * FROM mouveall";
         $donnees = $data->query($query)->fetchAll();
         if (count($donnees) > 0) {
             return $donnees;
