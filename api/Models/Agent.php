@@ -10,7 +10,7 @@ class Agent
     private static function generateMatricule($category)
     {
         $prefix = strtoupper(substr($category, 0, 3)); // Prend les 3 premières lettres de la catégorie
-        $data = get_connection(); 
+        $data = get_connection();
 
         // Compte les agents existants dans la même catégorie pour incrémenter le numéro
         $count = $data->query("SELECT COUNT(*) as total FROM agent WHERE category = '$category'")->fetch()['total'];
@@ -96,6 +96,29 @@ class Agent
         $donnees = $data->query("SELECT * FROM agent ORDER BY id DESC LIMIT 1")->fetchAll();
         if (count($donnees) > 0) {
             return $donnees;
+        }
+    }
+    public static function get_all_Mecaniciens()
+    {
+        $data = get_connection();
+        $donnees = $data->query("SELECT * FROM agent WHERE category = 'Mecanicien' ORDER BY id DESC")->fetchAll();
+        if (count($donnees) > 0) {
+            return $donnees;
+        } else {
+            $response["message"] = "Aucun mécanicien trouvé";
+            return $response;
+        }
+    }
+
+    public static function get_all_Chauffeurs()
+    {
+        $data = get_connection();
+        $donnees = $data->query("SELECT * FROM agent WHERE category = 'Chauffeur' ORDER BY id DESC")->fetchAll();
+        if (count($donnees) > 0) {
+            return $donnees;
+        } else {
+            $response["message"] = "Aucun chauffeur trouvé";
+            return $response;
         }
     }
 }

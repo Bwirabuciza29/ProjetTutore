@@ -66,3 +66,12 @@ function get_all_agents()
 {
     return Agent::get_all_Agents();
 }
+function get_all_mecaniciens()
+{
+    return Agent::get_all_Mecaniciens();
+}
+
+function get_all_chauffeurs()
+{
+    return Agent::get_all_Chauffeurs();
+}

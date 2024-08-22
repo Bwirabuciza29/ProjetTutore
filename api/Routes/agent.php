@@ -12,6 +12,12 @@ if ($url_path1 == "agent") {
         if ($url_path2 == "get") {
             $data["response"] = get_all_agents();
             echo json_encode($data);
+        } elseif ($url_path2 == "mecaniciens") {
+            $data["response"] = get_all_mecaniciens();
+            echo json_encode($data);
+        } elseif ($url_path2 == "chauffeurs") {
+            $data["response"] = get_all_chauffeurs();
+            echo json_encode($data);
         }
     }
     // POST actions
