@@ -66,7 +66,7 @@ class Reparation
     public static function get_all_Reparations()
     {
         $data = get_connection();
-        $donnees = $data->query("SELECT * FROM reparation ORDER BY id DESC")->fetchAll();
+        $donnees = $data->query("SELECT * FROM allrep")->fetchAll();
         if (count($donnees) > 0) {
             return $donnees;
         } else {
