@@ -132,7 +132,11 @@ class Stock
     public static function get_all_Stock()
     {
         $data = get_connection();
-        $query = "SELECT * FROM stockall";
+        $query = "SELECT stock.id, piece.designation, piece.quantite AS quantite_piece, mouvement.quantite AS quantite_mouvement, mouvement.type, stock.QteEntree, stock.QteSortie, stock.total, stock.dateStock
+                  FROM stock
+                  JOIN piece ON stock.idPiece = piece.id
+                  JOIN mouvement ON stock.idMouv = mouvement.id
+                  ORDER BY stock.id DESC";
         $donnees = $data->query($query)->fetchAll();
         if (count($donnees) > 0) {
             return $donnees;
