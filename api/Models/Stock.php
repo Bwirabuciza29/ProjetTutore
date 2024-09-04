@@ -132,7 +132,7 @@ class Stock
     public static function get_all_Stock()
     {
         $data = get_connection();
-        $query = "SELECT * FROM stockall";
+        $query = "SELECT * FROM stockalls";
         $donnees = $data->query($query)->fetchAll();
         if (count($donnees) > 0) {
             return $donnees;
